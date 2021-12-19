@@ -1,0 +1,51 @@
+<%- include('../partials/header.ejs')%>
+
+<%function groupBy(OurArray, property) {  %>
+  <%return OurArray.reduce(function (accumulator, object) { %>
+    <%const key = object[property]; %>
+        <%if (!accumulator[key]) { %>
+          <%accumulator[key] = []; %>
+        <%}%>
+    <%accumulator[key].push(object);%>
+    <%return accumulator;%>
+  <%}, {});%>
+<%}%>
+
+<%const allConnections = groupBy(connections, 'category');%>
+<%const categoryName = Object.keys(allConnections);%> 
+<% const categoryProperties = Object.values(allConnections);%>
+<div class="wrap">
+    <%for (var j=0; j< categoryName.length; j++){%>
+      <div class="corner">
+        <div class = "box">
+          <div class = "innerBox">
+            <div class="flipboxcat">
+              <div class="flipboxcatin">
+                <div class="flipboxcatfront">
+                  <%if (categoryName[j] === "baking"){%>                 
+                    <img class="flip_images" src = "/images/<%= categoryName[j]%>.jpg" alt="bake"/>
+                    <%}
+                  else if (categoryName[j] === "food4") {%>
+                    <img class="flip_images" src="/images/<%= categoryName[j]%>.jpg" alt="food"/>
+                  <%}
+                  else if (categoryName[j] === "food99") {%>
+                    <img class="flip_images" src="/images/<%= categoryName[j]%>.jpg" alt="OtherCategory"/>
+                  <%}%>    
+                </div>
+                <div class="fliboxcatback" >
+                      <%= categoryName[j]%><br>
+                      <%categoryProperties[j].forEach(story=> {%>
+                    <small><u><a href="/connections/<%= story.id%>" class= "link1"><%=story.title%><br/></a></u></small>
+                  <%});%>
+                </div>
+                 
+              </div>
+            
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    <%}%>
+</div> 
+<%- include('../partials/footer.ejs')%>

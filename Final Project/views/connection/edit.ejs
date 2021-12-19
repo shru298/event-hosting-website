@@ -1,0 +1,44 @@
+<%- include('../partials/header.ejs')%>
+<div class="createEvent">
+    <form method="POST" action='/connections/<%=story.id%>?_method=PUT'>
+        
+        <h1> Edit Event Details </h1>        
+        <label for="category" >Category</label>
+         <input type="text" id="category" name="category" value = "<%= story.category%>" required>
+        
+        <label for="title" >Title</label>
+         <input type="text" id="title" name="title" value = "<%= story.title%>" required>
+            
+        <label for="sub_title" >Sub Title</label>
+        <input type="text" id="sub_title" name="sub_title" value = "<%= story.sub_title%>"  required>
+            
+        <label for="details" >Details</label>
+        <input type="text" id="details" name="details" value = "<%= story.details%>" minlength="10" required>
+        <br/><br/><br/>
+        
+        <label for="start_date" >Start Date</label>
+        <input type="date" id="start_date" name="start_date" value = "<%= story.start_date%>" required>
+            
+        <label for="end_date" >End Date</label>
+        <input type="date" id="end_date" name="end_date" value = "<%= story.end_date%>" required >
+        <br/><br/>
+         
+        <label for="start_time" >Start Time</label>
+        <input type="time" id="start_time" name="start_time" value = "<%= story.start_time%>" required>
+          
+        <label for="end_time" >End Time</label>
+        <input type="time" id="end_time" name="end_time" value = "<%= story.end_time%>" required>
+        <br/><br/><br/>
+            
+        <label for="location" >Location</label>
+        <input type="text" id="location" name="location" value = "<%= story.location%>" required >
+
+        <label for="image" >Image</label>
+        <input type="text" id="image" name="image" value = "<%= story.image%>" required>
+        
+        <input type="submit" value="Submit">
+            
+    </form>
+
+</div>
+<%- include('../partials/footer.ejs')%>

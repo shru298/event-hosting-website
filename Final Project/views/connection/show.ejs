@@ -1,0 +1,68 @@
+<%- include ('../partials/header.ejs')%>
+
+<div class="bakery">
+    <div class="bakery_indiv">
+        
+        <table>
+            <tr>
+                <td>
+                </td>
+                <td class='tb1'>
+                    
+                    <form>
+                    <%if(user == story.author._id){ %>
+                    <button class="connection_button" type="submit" formmethod="GET" formaction="/connections/<%= story._id%>/edit">Edit</button>
+                    <button class="connection_button" type="submit" formmethod="POST" formaction="/connections/<%= story._id%>?_method=DELETE">Delete</button>
+                    <%}%>
+                    </form> 
+                    
+                </td>               
+            </tr>
+        
+        </table> 
+        <table class="category_details">
+            <tr>
+                <td>
+                    <h4 class= "descrip1"><%= story.title%></h4>
+                </td>
+            </tr>
+            <tr>    
+                <td><img class="image_desc" src="<%= story.image%>" alt="<%= story.image_tag %>"/>
+                </td>  
+                <td>
+                    <h3 class="descrip"><u><%= story.sub_title%></u></h3>        
+                            <b>
+                                Hosted By: <%= story.author.firstName%> <%= story.author.lastName%><br>
+                                Mark the Date: <%= story.start_date%> to <%= story.end_date%><br>
+                                Timing: <%= story.start_time%> to <%= story.end_time%><br>
+                                Location: <%= story.location%>
+                            </b>
+                        
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br/>
+                        <h2 class="connections_View">Details</h2><hr class="connections_View">
+                        <br />
+                        <div class="connections_View"><%= story.details%></div>
+            
+
+                        <u><h4 class="connections_View">People attending: <%= rsvpCount %> people are attending</h4></u>
+                        <% if(user != story.author._id) { %>
+                        <p class="connections_View">RSVP to attend!</p>
+                        <form style="width: 100%;">
+                            <button class="connection_button2" name="status" type="submit" formmethod="POST" value="Yes" formaction="/connections/<%= story._id %>/rsvp">Yes</button>
+                            <button class="connection_button2" name="status" type="submit" formmethod="POST" value="Maybe" formaction="/connections/<%= story._id %>/rsvp">Maybe</button>
+                            <button class="connection_button2" name="status" type="submit" formmethod="POST" value="No" formaction="/connections/<%= story._id %>/rsvp">No</button>
+                        </form>
+                        <% } %>
+                    </div>
+                </td>
+                
+            </tr>
+        </table>
+ 
+</div>
+</div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,73 @@
+<%- include('../partials/header.ejs')%>
+<br/>
+<br/><br/><br/><br/>
+<br>
+<br>
+<br>
+<br>
+
+
+<i><h2 class='fushia-text'> Welcome <%= user.firstName + " " + user.lastName%>.  Below Are Your Event Details</h2></i>
+
+    <%if(connections.length) {%>
+        <table id="event_details">
+            <tr>
+                <th>Events</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        <%connections.forEach(story => {%>
+            
+                
+                <tr> 
+                    <td><a href = '/connections/<%= story._id%>'><p><%=story.title%></p></a></td>  
+                    <td><%=story.category%></td>
+                    <td class='tabletd'>
+                        <form>
+                        <button class="connection_button2" type="submit" formmethod="GET" formaction="/connections/<%= story._id%>/edit">Edit</button>
+                        <button class="connection_button2" type="submit" formmethod="POST" formaction="/connections/<%= story._id%>?_method=DELETE">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            
+        <%});
+    
+    }else{%>
+    
+        <p>
+            <i><h2 class="fushia-text">You have not created any events yets!</h2></i>
+        </p>
+    
+    <%}%>
+</div>
+</table>
+    <div>
+       <i><h2 class="fushia-text"><%=user.firstName%>'s Rsvp</h2></i> 
+    </div> 
+    <% if(rsvps.length){ %>
+    <table id="event_details">
+        <tr>
+          <th>Connection</th>
+          <th>Category</th>
+          <th>Going?</th>
+          <th>Action</th>
+        </tr>
+        <% rsvps.forEach(rsvp => { %>
+        <tr>
+            <td><%= rsvp.connection.title %></td>
+            <td><%= rsvp.connection.category %></td>
+            <td><%= rsvp.status %></td>
+            <td>
+                <form style="float: left;">
+                    <button class="connection_button2" type="submit" formmethod="GET" formaction="/connections/<%= rsvp.connection._id %>">Edit</button>
+                    <button class="connection_button2" type="submit" formmethod="POST" formaction="/connections/rsvp/<%= rsvp._id %>?_method=DELETE">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+    <% } else { %>
+        <p><i><h2 class="fushia-text">There are no RSVP to display.</h2></i><p>
+    <% } %>
+
+<%- include('../partials/footer.ejs')%> 
